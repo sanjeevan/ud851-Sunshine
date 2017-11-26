@@ -221,8 +221,25 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
             return true;
         }
 
-        // TODO (2) Launch the map when the map menu item is clicked
+        if (id == R.id.action_open_map) {
+            openMap();
+        }
+        // complete (2) Launch the map when the map menu item is clicked
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openMap() {
+        String location = "10 Downing Street, London";
+
+        Uri uri = new Uri.Builder()
+                .scheme("geo")
+                .appendQueryParameter("q", location)
+                .build();
+
+        Intent openMap = new Intent(Intent.ACTION_VIEW, uri);
+        if (openMap.resolveActivity(getPackageManager()) != null) {
+            startActivity(openMap);
+        }
     }
 }
